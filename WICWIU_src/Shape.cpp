@@ -60,7 +60,6 @@ int Shape::Alloc(Shape *pShape) {
 #ifdef __CUDNN__
     m_idOfDevice = pShape->GetDeviceID();
 
-    if (m_Device == GPU) SetDeviceGPU(m_idOfDevice);
 #endif  // if __CUDNN__
 
     return TRUE;

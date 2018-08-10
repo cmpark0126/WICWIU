@@ -5,12 +5,12 @@
 
 #include "NeuralNetwork.h"
 
-#ifndef BroadCast
+#ifndef SyncBetweenDevices
   #define  BroadCast     0
   #define  AllReduceRing 1
 #endif
 
-#ifndef Thread
+#ifndef ThreadOrProcess
   #define  Thread     0
   #define  Process    1
 #endif

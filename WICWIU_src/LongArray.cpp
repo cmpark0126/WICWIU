@@ -52,7 +52,6 @@ template<typename DTYPE> int LongArray<DTYPE>::Alloc(LongArray *pLongArray) {
 #ifdef __CUDNN__
     m_idOfDevice = pLongArray->GetDeviceID();
 
-    if (m_Device == GPU) pLongArray->SetDeviceGPU(m_idOfDevice);
 #endif  // if __CUDNN__
 
     return TRUE;

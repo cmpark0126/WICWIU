@@ -54,7 +54,7 @@ template<typename DTYPE> int Tensor<DTYPE>::Alloc(Tensor<DTYPE> *pTensor) {
     } else {
         m_aShape     = new Shape(pTensor->GetShape());
         m_aLongArray = new LongArray<DTYPE>(pTensor->GetLongArray());
-        m_Device     = pTensor->GetDevice();
+        m_Device     = CPU; //Do not duplicate Device information
         m_IsUseTime  = pTensor->GetIsUseTime();
     }
 
@@ -455,7 +455,7 @@ template<typename DTYPE> void Tensor<DTYPE>::SetDeviceGPU(unsigned int idOfDevic
     std::cout << "Tensor<DTYPE>::SetDeviceGPU()" << '\n';
     # endif // __DEBUG__
     checkCudaErrors(cudaSetDevice(idOfDevice));
-    
+
     m_Device     = GPU;
     m_idOfDevice = idOfDevice;
     m_aLongArray->SetDeviceGPU(idOfDevice);
