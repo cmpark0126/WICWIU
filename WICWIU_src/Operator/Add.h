@@ -58,6 +58,17 @@ public:
         return TRUE;
     }
 
+    Operator<DTYPE>* Clone() {
+        Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
+
+        Tensor<DTYPE> *left  = (*input_contatiner)[0]->GetResult();
+        Tensor<DTYPE> *right = (*input_contatiner)[1]->GetResult();
+
+        std::string name = this->GetName();
+
+        return new Addall(left, right, name);
+    }
+
 #ifdef __CUDNN__
     void InitializeAttributeForGPU(unsigned int idOfDevice) {
         m_alpha = 1;
@@ -282,6 +293,17 @@ public:
         this->SetGradient(new Tensor<DTYPE>(m_timesize, m_batchsize, m_channelsize, m_rowsize, m_colsize));
 
         return TRUE;
+    }
+
+    Operator<DTYPE>* Clone() {
+        Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
+
+        Tensor<DTYPE> *input  = (*input_contatiner)[0]->GetResult();
+        Tensor<DTYPE> *bias   = (*input_contatiner)[1]->GetResult();
+
+        std::string name = this->GetName();
+
+        return new AddColWise(input, bias, name);
     }
 
 #ifdef __CUDNN__
@@ -509,6 +531,17 @@ public:
         this->SetGradient(new Tensor<DTYPE>(m_timesize, m_batchsize, m_channelsize, m_rowsize, m_colsize));
 
         return TRUE;
+    }
+
+    Operator<DTYPE>* Clone() {
+        Container<Operator<DTYPE> *> *input_contatiner = this->GetInputContainer();
+
+        Tensor<DTYPE> *input  = (*input_contatiner)[0]->GetResult();
+        Tensor<DTYPE> *bias   = (*input_contatiner)[1]->GetResult();
+
+        std::string name = this->GetName();
+
+        return new AddChannelWise(input, bias, name);
     }
 
     #ifdef __CUDNN__

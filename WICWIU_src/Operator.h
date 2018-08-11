@@ -46,6 +46,8 @@ public:
     Operator(Operator<DTYPE> *pInput0, Operator<DTYPE> *pInput1, std::string pName = "NO NAME");
     virtual ~Operator();
 
+    virtual Operator<DTYPE>             * Clone() = 0;
+
     int                                   AddEdgebetweenOperators(Operator<DTYPE> *pInput);
     int                                   AddEdgebetweenOperators(int numInput, ...);
     int                                   AddResult(Tensor<DTYPE> *pTensor);
